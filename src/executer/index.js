@@ -7,7 +7,16 @@ const {validator: Validator} = require('@qtk/schema');
 module.exports = class {
     static exec(qtkSchema, branchConfig= {}) {
         let jsonSchema = Validator.from(qtkSchema).jsonSchema;
-        return this._exec(jsonSchema, undefined, "", new Map(), branchConfig);
+        if (Object.keys(branchConfig).length !== 0) { //数组[]支持
+            branchConfig = Object.keys(branchConfig)
+                .reduce((prev, rawKey) => { 
+                    let key = rawKey.replace(/\./g, '\\\.');
+                    key = key.replace(/\[\]/g, '\\\[\\\d+\\\]');
+                    prev[key] = branchConfig[rawKey];
+                    return prev;
+                }, {});
+        }
+        return this._exec(jsonSchema, undefined, ".", new Map(), branchConfig);
     }
 
     static _exec(schema, contextFakeData, path, globalFakeDataMap, branchConfig) {
@@ -41,8 +50,9 @@ module.exports = class {
         else if (typeof schema.example === 'function') {
             let proxy = new Proxy(schema.example, {
                 apply (target, ctx, args) {                            
-                    return Reflect.apply(target, contextFakeData, [(level = 0) => {
+                    return Reflect.apply(target, Object.assign(contextFakeData), [(level = 0) => {
                         let parentPath = path.split('.').slice(0, -2 - level).join('.');
+                        if (parentPath === "") parentPath = '.';
                         return globalFakeDataMap.get(parentPath) || null;
                     }]);
                 }
@@ -70,7 +80,7 @@ module.exports = class {
                     return Reflect.get(target, key, _proxy);
                 }
                 if (!Object.keys(target).includes(key)) { //节点值还未生成,则先进行生成
-                    value = that._exec(schema.properties[key], _proxy, `${path}.${key}`, globalFakeDataMap, branchConfig);
+                    value = that._exec(schema.properties[key], _proxy, path === '.' ? `${path}${key}` : `${path}.${key}`, globalFakeDataMap, branchConfig);
                     target[key] = value;
                     return value;
                 }
@@ -82,23 +92,28 @@ module.exports = class {
         globalFakeDataMap.set(path, proxy);
 
         //if-require处理
-        // console.log(schema)
         if (schema.if !== undefined) {
             let listIfObjectSchema = this._listIfObjectSchema(schema);
-            let randomIndex = branchConfig[path] === undefined ? Math.floor(Math.random() * listIfObjectSchema.length) : branchConfig[path];
+            
+            let matchKey = Object.keys(branchConfig)
+                .filter(key => (new RegExp(key)).test(path))
+                .sort((left, right) => left.length - right.length)
+                .pop();
+            let randomIndex = matchKey === undefined ? Math.floor(Math.random() * listIfObjectSchema.length) : branchConfig[matchKey];
+
             schema = listIfObjectSchema[randomIndex];
             schema = this._getIfObjectSchema(schema, listIfObjectSchema.filter((_, index) => index !== randomIndex));
         }
 
         if (schema.patternProperties !== undefined) {
             value = Object.keys(schema.patternProperties).reduce((prev, key) => {
-                prev[new RandExp(new RegExp(key)).gen()] = this._exec(schema.patternProperties[key], prev, `${path}.${key}`, globalFakeDataMap, branchConfig);
+                prev[new RandExp(new RegExp(key)).gen()] = this._exec(schema.patternProperties[key], prev, path === '.' ? `${path}${key}` : `${path}.${key}`, globalFakeDataMap, branchConfig);
                 return prev;
             }, proxy);
         }
         else {
             value = Object.keys(schema.properties || {}).reduce((prev, key) => {
-                if (!Object.keys(prev).includes(key)) prev[key] = this._exec(schema.properties[key], prev, `${path}.${key}`, globalFakeDataMap, branchConfig);
+                if (!Object.keys(prev).includes(key)) prev[key] = this._exec(schema.properties[key], prev, path === '.' ? `${path}${key}` : `${path}.${key}`, globalFakeDataMap, branchConfig);
                 return prev;
             }, proxy);
         }
@@ -115,7 +130,7 @@ module.exports = class {
         globalFakeDataMap.set(path, collection);
         if (schema.items !== undefined) {
             for (let index in Array(amount).fill("")) {
-                let item = this._exec(schema.items, collection, `${path}.[${index}]`, globalFakeDataMap, branchConfig);
+                let item = this._exec(schema.items, collection, path === '.' ? `${path}[${index}]` : `${path}.[${index}]`, globalFakeDataMap, branchConfig);
                 collection.push(item);
                 globalFakeDataMap.set(`${path}.[${index}]`, item);
             }
@@ -124,7 +139,12 @@ module.exports = class {
     }
 
     static _oneOfData(schema, contextFakeData, path, globalFakeDataMap, branchConfig) {
-        let randomIndex = branchConfig[path] === undefined ? Math.floor(Math.random() * schema.oneOf.length) : branchConfig[path];
+        let matchKey = Object.keys(branchConfig)
+            .filter(key => (new RegExp(key)).test(path))
+            .sort((left, right) => left.length - right.length)
+            .pop();
+        let randomIndex = matchKey === undefined ? Math.floor(Math.random() * schema.oneOf.length) : branchConfig[matchKey];
+
         return this._exec(schema.oneOf[randomIndex], contextFakeData, path, globalFakeDataMap, branchConfig);
     }
 

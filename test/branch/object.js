@@ -24,7 +24,7 @@ describe('object', function() {
             }).requireAll()
             .endIf;
         let mockData = executer.exec(schema, {
-            "": 0
+            ".": 0
         });
         let validator = Validator.from(schema);
         assert(
@@ -49,7 +49,7 @@ describe('object', function() {
             .else.require('type', 'staff1')
             .endIf;
         let mockData = executer.exec(schema, {
-            "": 0
+            ".": 0
         });
         let validator = Validator.from(schema);
         assert(

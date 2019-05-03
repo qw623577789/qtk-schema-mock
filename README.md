@@ -25,13 +25,14 @@ console.log(mockData)
 
 - 支持string、boolean、null、integer、number、object、array数据类型
 - **支持oneOf、if...elseif...else...endif语法**
-- 内置常用数据生成器，基本能覆盖日常模拟数据的生成需求。若不满足，可自定义数据生成器
+- 内置常用数据生成器，基本能覆盖日常模拟数据的生成需求。若不满足，可**自定义数据生成器**
 - **支持节点之间数据的依赖关系**
+- **支持schema存在分支情况下(`oneOf`、`if`)，控制生成数据使用的分支**
 
 ## 文档
 
 ### 语法
-此库需要配合@qtk/schema一起使用，每个数据类型（string、number、integer、boolean、empty）都有一个``example``方法，可以通过参数形式指定生成数据.参数有如下四种情况:
+此库需要配合@qtk/schema一起使用，每个数据类型（string、number、integer、boolean、empty）都有一个``example``方法，可以通过参数形式指定生成数据情况.参数有如下四种情况:
 
 - **常量**
 
@@ -92,7 +93,7 @@ console.log(mockData)
 
 - **不传参数/不定义example**
 
-    此情况在生成假数据时，会根据当前该节点的数据类型，自动调用该数据类型的基础faker生成模拟数据.
+    此情况会根据当前该节点的数据类型，自动调用该数据类型的基础faker生成模拟数据.
 
     数据类型|基础faker
     --|--
@@ -104,7 +105,7 @@ console.log(mockData)
     object|根据对象里每个节点数据类型，调用对应faker,最终组成对象
     array|根据数组元素结构描述(schema)，调用对应faker,生成数组元素，最终组成数组
 
-### 影响模拟数据结果的schema关键字
+### 影响Mock结果的schema关键字
 
 数据类型|关键字|例子
 --|--|--
@@ -443,13 +444,13 @@ oneOf|其无关键字|[样例](test/mock/oneOf.js)
 
 
 ### 节点值引用
-有时候在生成数据时，节点的值可能依赖于其他节点，此时可以使用函数对其他节点进行引用运算。框架正常情况会按照从上往下的顺序，依次生成节点值。万一遇到有节点值依赖，框架会处理好节点之间的依赖关系，调整生成顺序，故使用者无需担心引用某个节点时，对应节点值未生成问题.
+有时候在生成数据时，节点的值可能依赖于其他节点，此时可以使用函数对其他节点进行引用运算。框架正常情况会按照**从上往下**的顺序，依次生成节点值。万一遇到有节点值依赖，框架会处理好节点之间的依赖关系，调整生成顺序，故使用者无需担心引用某个节点时，对应节点值未生成问题.
 
-在函数内有两个关键字：``this``、``parent``
+在函数内有两个关键字：**``this``**、**``parent``**
 
-``this``: 代表当前object对象,可以使用this.xxx(某个属性名)来访问该属性值。*注意:这里函数不能使用箭头函数，因为箭头函数的this指向问题*
+**``this``**: 代表当前object对象,可以使用this.xxx(某个属性名)来访问该属性值。***注意:这里函数不能使用箭头函数，因为箭头函数的this指向问题***
 
-``parent``: 其为一个方法，可访问当前object的父对象．例如parent()/parent(0)访问的是当前object的父对象，使用parent().xxx(某个属性名)来访问父对象属性值。使用parent(1).xxx(某个属性名)来访问当前对象的爷爷对象属性值，以此类推。
+**``parent``**: 其为一个**方法**，可访问当前object的父对象．例如parent()/parent(0)访问的是当前object的父对象，使用parent().xxx(某个属性名)来访问父对象属性值。使用parent(1).xxx(某个属性名)来访问当前对象的爷爷对象属性值，以此类推。
 
 #### 同个对象内对已生成的节点值依赖
 ```js
@@ -557,7 +558,7 @@ let schema = array({
 ]
 ```
 #### 数组元素对象对已生成的同级数组元素的值依赖
-由于数组元素是按顺序生成的，在日常使用中，一般只有后一个数组元素对前一个数组元素的依赖，不会对还未生成的数组元素有依赖，故目前只支持*数组元素对象对已生成的同级数组元素的值依赖*
+数组元素是按顺序生成的，在日常使用中，一般只有后一个数组元素对前一个数组元素的依赖，不会对还未生成的数组元素有依赖，故目前只支持 ***数组元素对象对已生成的同级数组元素的值依赖***
 ```js
 let schema = {
     foo: string(),
@@ -601,7 +602,7 @@ let schema = {
 若string有定义``title``、``desc``时，且没有指明要生成的字符串内容的话(例如没设置enum, pattern),优先使用``title``或``desc``的值作为模拟出来的值。优先级``title``>``desc``
 
 #### If
-在模拟数据时，库会根据目前已生成的值情况，结合if定义，生成符合if条件的数据
+在模拟数据时，在未指定采用分支情况下，库会随机选择一个分支进行模拟数据
 ```js
 let schema = object()
     .if.properties({type: string().enum('student')})
@@ -687,7 +688,7 @@ let schema = {
 
 **oneOf**: oneOf本身就是描述分支情况
 
-有时候在生成随机数据时，若schema存在分支情况，可能想要控制生成的数据是某个分支的情况的话，可以在``exec``执行时传入分支控制参数，具体如下:
+若schema存在分支情况，有时候在生成随机数据时，可能想要控制生成的数据是某个分支的情况的话，可以在``exec``执行时传入分支控制参数，具体如下:
 ```js
 {
     路径:　分支序号 
@@ -714,7 +715,7 @@ let schema = object()
     }).requireAll()
     .endIf;
 let mockData = executer.exec(schema, {
-    "": 0 //控制模拟器模拟第一个if情况的数据
+    ".": 0 //控制模拟器模拟分支序号0情况的数据
 });
 console.log(mockData)
 ```
@@ -744,8 +745,8 @@ let schema = array().item(
     )
 );
 let mockData = executer.exec(schema, {
-    ".[0]": 3, //控制生成的第一个数组元素采用分支序号为3的情况
-    ".[0].d": 1 //上面采用分支序号为3情况后，控制d采用分支序号为1的情况
+    ".[]": 3, //控制生成的数组元素采用分支序号为3的情况
+    ".[].d": 1 //上面采用分支序号为3情况后，控制d采用分支序号为1的情况
 });
 let validator = Validator.from(schema);
 console.log(mockData);
@@ -773,7 +774,7 @@ let schema = oneOf(
     })
 );
 let mockData = executer.exec(schema, {
-    "": 3, //控制生成的第一个数组元素采用分支序号为3的情况
+    ".": 3, //控制生成的第一个数组元素采用分支序号为3的情况
     ".d": 1 //上面采用分支序号为3情况后，控制d采用分支序号为1的情况
 });
 let validator = Validator.from(schema);
@@ -788,7 +789,7 @@ console.log(mockData)
 当发现库提供的faker不满足您的需求时，可以自行开发符合您需求的faker,向框架注册后即可使用。具体步骤如下:
 1. 新建一个类继承BaseFaker
 2. 实现自定义Faker类
-- 实现fake方法，输入参数为该字段的schema定义,输出为模拟出来的数据。各种数据类型可使用的关键字如下(**enum关键字已由库统一处理,开发者无需关注**):
+- 实现**fake**方法，**输入参数为该字段的schema定义**,**输出为模拟出来的数据**。各种数据类型可使用的关键字如下(**enum关键字已由库统一处理,开发者无需关注**):
 
     数据类型|关键字
     --|--
@@ -796,7 +797,7 @@ console.log(mockData)
     integer|maximum、minimum、exclusiveMaximum、exclusiveMinimum
     number|maximum、minimum、exclusiveMaximum、exclusiveMinimum
 
-- Faker类构造函数输入参数为Faker使用时传入的参数，例如faker.mobile支持传入的参数为：
+- Faker类构造函数输入参数为**Faker使用时传入**的参数，例如faker.mobile支持传入的参数为：
 faker.mobile({prefix})
 那么mobile类在构造函数被执行时可以获得如下参数:
     ```js
@@ -812,7 +813,8 @@ faker.mobile({prefix})
     randomFloatInRange|随机生成指定范围内的一个浮点数|(min, max, precision = -1)
 
 3. 注册自定义Faker
-使用``registerFaker``函数，传入faker的名字及faker类，函数将返回一个新的@qtk/schema-mock对象。*registerFaker支持一次性传入多个自定义faker对象，以逗号隔开就行*
+
+    使用``registerFaker``函数，传入faker的名字及faker类，函数将返回一个新的@qtk/schema-mock对象。***registerFaker支持一次性传入多个自定义faker对象，以逗号隔开就行***
     ```js
     const qtkSchemaMock = require('@qtk/schema-mock').registerFaker({
         fakerName: "animal",
@@ -826,7 +828,7 @@ faker.mobile({prefix})
 
 #### 完整样例
 ```js
-const CustomAnimalFaker = class extends require("@qtk/schema-mock").BaseFaker {
+const AnimalFaker = class extends require("@qtk/schema-mock").BaseFaker {
     constructor(params) {
         super();
         this._animals = ["mouse", "rabbit", "cat", "bird"];
@@ -838,12 +840,11 @@ const CustomAnimalFaker = class extends require("@qtk/schema-mock").BaseFaker {
     }
 }
 
-const {executer, schema: {string}， faker} = require('@qtk/schema-mock').registerFaker({
+const {string} = require('@qtk/schema').schema;
+const {executer, faker} = require('@qtk/schema-mock').registerFaker({
     fakerName: "animal",
-    faker: CustomAnimalFaker
+    faker: AnimalFaker
 });
-
-const {object, string, integer} = QtkSchema.schema;
 
 const schema = string().example(faker.animal());
 const mockData = executer.exec(schema);
@@ -853,3 +854,9 @@ console.log(mockData)
 ```bash
 rabbit
 ```
+
+## 遗留问题
+**1. 不支持含有if.patternProperties的schema在生成数据时控制分支情况**
+
+## 许可
+MIT

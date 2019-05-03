@@ -23,7 +23,7 @@ describe('oneOf', function() {
             })
         );
         let mockData = executer.exec(schema, {
-            "": 3,
+            ".": 3,
             ".d": 1
         });
         let validator = Validator.from(schema);

@@ -25,8 +25,8 @@ describe('array', function() {
             )
         );
         let mockData = executer.exec(schema, {
-            ".[0]": 3,
-            ".[0].d": 1
+            ".[]": 3,
+            ".[].d": 1
         });
         let validator = Validator.from(schema);;
         assert(
@@ -38,4 +38,5 @@ describe('array', function() {
             mockData[0].d.da !== undefined
         );
     });
+
 });

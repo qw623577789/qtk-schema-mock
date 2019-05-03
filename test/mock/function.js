@@ -147,7 +147,6 @@ describe('function', function() {
         }).length(1);
         let mockData = executer.exec(schema);
         let validator = Validator.from(schema);
-        console.log(validator.validate(mockData) === true)
         assert(validator.validate(mockData) === true && mockData[0].foo1 === `${mockData[0].foo}${mockData[0].bar}`);
     });
 

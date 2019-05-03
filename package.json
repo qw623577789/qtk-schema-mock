@@ -1,39 +1,39 @@
 {
-  "name": "@qtk/schema-mock",
-  "version": "0.3.1",
-  "description": "write json schema in a graceful way.",
-  "main": "index.js",
-  "scripts": {
-    "test": "./node_modules/.bin/_mocha ./test/index.js"
-  },
-  "author": "Magnus Lin",
-  "license": "ISC",
-  "dependencies": {
-    "@qtk/schema": "0.0.3",
-    "moment": "^2.24.0",
-    "randexp": "^0.5.3",
-    "semantic-schema": "^0.3.1",
-    "uuid": "^3.3.2"
-  },
-  "directories": {
-    "example": "example"
-  },
-  "devDependencies": {
-    "mocha": "^5.0.4"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/magnuslim/semantic-schema.git"
-  },
-  "keywords": [
-    "json-schema",
-    "json",
-    "schema",
-    "object",
-    "semantic"
-  ],
-  "bugs": {
-    "url": "https://github.com/magnuslim/semantic-schema/issues"
-  },
-  "homepage": "https://github.com/magnuslim/semantic-schema#readme"
+    "name": "@qtk/schema-mock",
+    "version": "0.0.0",
+    "description": "基于qtk-schema生成模拟数据",
+    "main": "index.js",
+    "scripts": {
+        "test": "./node_modules/.bin/_mocha ./test/index.js"
+    },
+    "author": "skip",
+    "license": "MIT",
+    "dependencies": {
+        "@qtk/schema": "0.0.3",
+        "moment": "^2.24.0",
+        "randexp": "^0.5.3",
+        "uuid": "^3.3.2"
+    },
+    "directories": {
+        "example": "example"
+    },
+    "devDependencies": {
+        "mocha": "^5.0.4"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/qw623577789/qtk-schema-mock.git"
+    },
+    "keywords": [
+        "mock",
+        "fake",
+        "json-schema",
+        "json",
+        "schema",
+        "qtk-schema",
+    ],
+    "bugs": {
+        "url": "https://github.com/qw623577789/qtk-schema-mock/issues"
+    },
+    "homepage": "https://github.com/qw623577789/qtk-schema-mock#readme"
 }
