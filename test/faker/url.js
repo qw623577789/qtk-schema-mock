@@ -10,7 +10,6 @@ describe('faker-url', function() {
         let mockData = executer.exec(schema);
         let validator = Validator.from(schema);
         assert(validator.validate(mockData) === true);
-        console.log(mockData)
     });
 
     it('不含域名', function() {
@@ -18,14 +17,12 @@ describe('faker-url', function() {
         let mockData = executer.exec(schema);
         let validator = Validator.from(schema);
         assert(validator.validate(mockData) === true && !mockData.startsWith('http'));
-        console.log(mockData)
     });
 
     it('含指定域名', function() {
         let schema = string().example(faker.url({domain: "http://www.baidu.com"}));
         let mockData = executer.exec(schema);
         let validator = Validator.from(schema);
-        console.log(mockData)
         assert(validator.validate(mockData) === true && mockData.startsWith('http://www.baidu.com'));
     });
 });

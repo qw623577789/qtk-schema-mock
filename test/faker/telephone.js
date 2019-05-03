@@ -9,7 +9,6 @@ describe('faker-telephone', function() {
         let schema = string().example(faker.telephone());
         let mockData = executer.exec(schema);
         let validator = Validator.from(schema);
-        console.log(mockData)
         assert(validator.validate(mockData) === true);
     });
 
@@ -17,7 +16,6 @@ describe('faker-telephone', function() {
         let schema = string().example(faker.telephone({province: '广东省'}));
         let mockData = executer.exec(schema);
         let validator = Validator.from(schema);
-        console.log(mockData)
         assert(
             validator.validate(mockData) === true &&
             require('../../src/module/area')
@@ -36,7 +34,6 @@ describe('faker-telephone', function() {
         let schema = string().example(faker.telephone({province: '广东省', city: '汕头市'}));
         let mockData = executer.exec(schema);
         let validator = Validator.from(schema);
-        console.log(mockData)
         assert(
             validator.validate(mockData) === true &&
             require('../../src/module/area')
@@ -52,7 +49,6 @@ describe('faker-telephone', function() {
         let schema = string().example(faker.telephone({province: '广东省', city: '汕头市', country: '濠江区'}));
         let mockData = executer.exec(schema);
         let validator = Validator.from(schema);
-        console.log(mockData)
         assert(
             validator.validate(mockData) === true &&
             mockData.startsWith(

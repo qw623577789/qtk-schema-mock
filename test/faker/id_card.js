@@ -10,7 +10,6 @@ describe('faker-id-card', function() {
         let schema = string().example(faker.idCard());
         let mockData = executer.exec(schema);
         let validator = Validator.from(schema);
-        console.log(mockData)
         assert(validator.validate(mockData) === true);
     });
 
@@ -18,7 +17,6 @@ describe('faker-id-card', function() {
         let schema = string().example(faker.idCard({birth: '1993-05-06'}));
         let mockData = executer.exec(schema);
         let validator = Validator.from(schema);
-        console.log(mockData)
         assert(validator.validate(mockData) === true && mockData.substr(6, 8) === '19930506');
     });
 
@@ -27,7 +25,6 @@ describe('faker-id-card', function() {
         let mockData = executer.exec(schema);
         let validator = Validator.from(schema);
         assert(validator.validate(mockData) === true && moment().diff(moment(mockData.substr(6, 8), 'YYYYMMDD'), 'years') === 25);
-        console.log(mockData)
         
     });
 
@@ -36,7 +33,6 @@ describe('faker-id-card', function() {
         let mockData = executer.exec(schema);
         let validator = Validator.from(schema);
         assert(validator.validate(mockData) === true && mockData.substring(-2, -1) % 2 === 0);
-        console.log(mockData)
     });
 
     it('指定省', function() {
@@ -51,7 +47,6 @@ describe('faker-id-card', function() {
                     .areaCode.substring(0, 2)
             )
         );
-        console.log(mockData)
     });
 
     it('指定省市', function() {
@@ -68,7 +63,6 @@ describe('faker-id-card', function() {
                     .areaCode.substring(0, 4)
             )
         );
-        console.log(mockData)
     });
 
     it('指定省市区', function() {
@@ -87,6 +81,5 @@ describe('faker-id-card', function() {
                     .areaCode.substring(0, 6)
             )
         );
-        console.log(mockData)
     });
 });

@@ -9,7 +9,6 @@ describe('faker-area-code', function() {
         let schema = string().example(faker.areaCode());
         let mockData = executer.exec(schema);
         let validator = Validator.from(schema);
-        console.log(mockData)
         assert(validator.validate(mockData) === true);
     });
 
@@ -17,7 +16,6 @@ describe('faker-area-code', function() {
         let schema = string().example(faker.areaCode({province: '广东省'}));
         let mockData = executer.exec(schema);
         let validator = Validator.from(schema);
-        console.log(mockData)
         assert(validator.validate(mockData) === true && mockData.startsWith('44'));
     });
 
@@ -25,7 +23,6 @@ describe('faker-area-code', function() {
         let schema = string().example(faker.areaCode({province: '广东省', city: '汕头市'}));
         let mockData = executer.exec(schema);
         let validator = Validator.from(schema);
-        console.log(mockData)
         assert(validator.validate(mockData) === true && mockData.startsWith('4405'));
     });
 
@@ -33,7 +30,6 @@ describe('faker-area-code', function() {
         let schema = string().example(faker.areaCode({province: '广东省', city: '汕头市', country: '濠江区'}));
         let mockData = executer.exec(schema);
         let validator = Validator.from(schema);
-        console.log(mockData)
         assert(validator.validate(mockData) === true && mockData === '440512');
     });
 });

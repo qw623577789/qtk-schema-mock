@@ -21,7 +21,6 @@ describe('object', function() {
         let mockData = executer.exec(schema);
         let validator = Validator.from(schema);
         assert(validator.validate(mockData) === true);
-        console.log(mockData)
     });
 
     it('.patternProperties()', function() {
@@ -31,7 +30,6 @@ describe('object', function() {
         let mockData = executer.exec(schema);
         let validator = Validator.from(schema);
         assert(validator.validate(mockData) === true);
-        console.log(mockData)
     });
 
     describe('if statement', function() {
@@ -55,7 +53,6 @@ describe('object', function() {
                 .endIf;
             let mockData = executer.exec(schema);
             let validator = Validator.from(schema);
-            console.log(mockData)
             assert(validator.validate(mockData) === true);
         });
     
@@ -74,7 +71,6 @@ describe('object', function() {
                 .endIf;
             let mockData = executer.exec(schema);
             let validator = Validator.from(schema);
-            console.log(mockData)
             assert(validator.validate(mockData) === true);
         });
 
@@ -94,8 +90,6 @@ describe('object', function() {
                 .endIf;
             let mockData = executer.exec(schema);
             let validator = Validator.from(schema);
-            console.log(JSON.stringify(validator.jsonSchema))
-            console.log(JSON.stringify(mockData))
             assert(validator.validate(mockData) === true);
         });
 
@@ -117,8 +111,6 @@ describe('object', function() {
                 .endIf;
             let mockData = executer.exec(schema);
             let validator = Validator.from(schema);
-            console.log(JSON.stringify(validator.jsonSchema))
-            console.log(JSON.stringify(mockData))
             assert(validator.validate(mockData) === true);
         });
 
@@ -144,7 +136,6 @@ describe('object', function() {
                 "": 1
             });
             let validator = Validator.from(schema);
-            console.log(mockData)
             assert(validator.validate(mockData) === true);
         });
     });

@@ -10,7 +10,6 @@ describe('faker-country', function() {
         let mockData = executer.exec(schema);
         let validator = Validator.from(schema);
         assert(validator.validate(mockData) === true);
-        console.log(mockData)
     });
 
     it('指定省市', function() {
@@ -26,6 +25,5 @@ describe('faker-country', function() {
                 .children
                 .some(_ => _.name === mockData)
         );
-        console.log(mockData)
     });
 });

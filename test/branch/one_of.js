@@ -27,7 +27,6 @@ describe('oneOf', function() {
             ".d": 1
         });
         let validator = Validator.from(schema);
-        console.log(mockData)
         assert(
             validator.validate(mockData) === true && 
             mockData.a !== undefined &&
@@ -63,7 +62,6 @@ describe('oneOf', function() {
             ".c": 2
         });
         let validator = Validator.from(schema);
-        console.log(mockData)
         assert(
             validator.validate(mockData) === true &&
             mockData.c !== undefined &&

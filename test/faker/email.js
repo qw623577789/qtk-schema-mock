@@ -9,7 +9,6 @@ describe('faker-email', function() {
         let schema = string().example(faker.email());
         let mockData = executer.exec(schema);
         let validator = Validator.from(schema);
-        console.log(mockData)
         assert(validator.validate(mockData) === true);
     });
 
@@ -17,7 +16,6 @@ describe('faker-email', function() {
         let schema = string().example(faker.email({suffix: 'vanchu.net'}));
         let mockData = executer.exec(schema);
         let validator = Validator.from(schema);
-        console.log(mockData)
         assert(validator.validate(mockData) === true && mockData.endsWith('vanchu.net'));
     });
 });

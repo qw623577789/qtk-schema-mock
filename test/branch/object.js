@@ -27,7 +27,6 @@ describe('object', function() {
             "": 0
         });
         let validator = Validator.from(schema);
-        console.log(mockData)
         assert(
             validator.validate(mockData) === true &&
             mockData.type === 'student' &&
@@ -53,7 +52,6 @@ describe('object', function() {
             "": 0
         });
         let validator = Validator.from(schema);
-        console.log(mockData)
         assert(
             validator.validate(mockData) === true &&
             mockData.type === 'student' &&

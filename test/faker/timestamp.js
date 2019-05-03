@@ -10,7 +10,6 @@ describe('faker-timestamp', function() {
         let mockData = executer.exec(schema);
         let validator = Validator.from(schema);
         assert(validator.validate(mockData) === true);
-        console.log(mockData)
     });
 
     it('指定时间', function() {
@@ -18,14 +17,12 @@ describe('faker-timestamp', function() {
         let mockData = executer.exec(schema);
         let validator = Validator.from(schema);
         assert(validator.validate(mockData) === true && mockData === 1554091200);
-        console.log(mockData)
     });
 
     it('指定时间+偏差', function() {
         let schema = integer().example(faker.timestamp({at: '2019-04-01 12:00:00', offset:{hours: -1, minutes: 1}}));
         let mockData = executer.exec(schema);
         let validator = Validator.from(schema);
-        console.log(mockData)
         assert(validator.validate(mockData) === true && mockData === 1554087660);
     });
 
@@ -34,6 +31,5 @@ describe('faker-timestamp', function() {
         let mockData = executer.exec(schema);
         let validator = Validator.from(schema);
         assert(validator.validate(mockData) === true && mockData.toString().length === 13);
-        console.log(mockData)
     });
 });

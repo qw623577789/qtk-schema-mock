@@ -8,8 +8,7 @@ describe('faker-chinese-first-name', function() {
     it('默认', function() {
         let schema = string().example(faker.chineseFirstName());
         let mockData = executer.exec(schema);
-        let validator = Validator.from(schema);
-        console.log(mockData);
+        let validator = Validator.from(schema);;
         assert(validator.validate(mockData) === true);
     });
 });

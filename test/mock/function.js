@@ -16,7 +16,6 @@ describe('function', function() {
         let mockData = executer.exec(schema);
         let validator = Validator.from(schema);
         assert(validator.validate(mockData) === true && mockData.foo1 === `${mockData.foo}${mockData.bar}`);
-        console.log(mockData)
     });
 
     it('同级未生成的值依赖', function() {
@@ -30,7 +29,6 @@ describe('function', function() {
         let mockData = executer.exec(schema);
         let validator = Validator.from(schema);
         assert(validator.validate(mockData) === true && mockData.foo1 === `${mockData.foo}${mockData.bar}`);
-        console.log(mockData)
     });
 
     it('爷爷级已生成的值依赖', function() {
@@ -46,7 +44,6 @@ describe('function', function() {
         let mockData = executer.exec(schema);
         let validator = Validator.from(schema);
         assert(validator.validate(mockData) === true && mockData.child.foo1 === `${mockData.foo}${mockData.bar}`);
-        console.log(JSON.stringify(mockData))
     });
 
     it('爷爷级已生成的值依赖', function() {
@@ -62,7 +59,6 @@ describe('function', function() {
         let mockData = executer.exec(schema);
         let validator = Validator.from(schema);
         assert(validator.validate(mockData) === true && mockData.child.foo1 === `${mockData.foo}${mockData.bar}`);
-        console.log(JSON.stringify(mockData))
     });
 
     it('曾祖父级已生成的值依赖', function() {
@@ -81,7 +77,6 @@ describe('function', function() {
         let mockData = executer.exec(schema);
         let validator = Validator.from(schema);
         assert(validator.validate(mockData) === true && mockData.child.child.foo1 === `${mockData.foo}${mockData.bar}`);
-        console.log(JSON.stringify(mockData))
     });
 
     it('曾祖父级未生成的值依赖', function() {
@@ -100,7 +95,6 @@ describe('function', function() {
         let mockData = executer.exec(schema);
         let validator = Validator.from(schema);
         assert(validator.validate(mockData) === true && mockData.child.child.foo1 === `${mockData.foo}${mockData.bar}`);
-        console.log(JSON.stringify(mockData))
     });
 
     it('曾祖父级已生成的值连环依赖', function() {
@@ -121,7 +115,6 @@ describe('function', function() {
         let mockData = executer.exec(schema);
         let validator = Validator.from(schema);
         assert(validator.validate(mockData) === true && mockData.child.child.foo1 === `${mockData.foo}${mockData.bar}`);
-        console.log(JSON.stringify(mockData))
     });
 
     it('曾祖父级未生成的值连环依赖', function() {
@@ -142,7 +135,6 @@ describe('function', function() {
         let mockData = executer.exec(schema);
         let validator = Validator.from(schema);
         assert(validator.validate(mockData) === true && mockData.child.child.foo1 === `${mockData.foo}${mockData.bar}`);
-        console.log(JSON.stringify(mockData))
     });
 
     it('数组：同级已生成的值依赖', function() {
@@ -155,10 +147,8 @@ describe('function', function() {
         }).length(1);
         let mockData = executer.exec(schema);
         let validator = Validator.from(schema);
-        console.log(mockData)
         console.log(validator.validate(mockData) === true)
         assert(validator.validate(mockData) === true && mockData[0].foo1 === `${mockData[0].foo}${mockData[0].bar}`);
-        console.log(JSON.stringify(mockData))
     });
 
     it('数组：同级未生成的值依赖', function() {
@@ -172,7 +162,6 @@ describe('function', function() {
         let mockData = executer.exec(schema);
         let validator = Validator.from(schema);
         assert(validator.validate(mockData) === true && mockData[0].foo1 === `${mockData[0].foo}${mockData[0].bar}`);
-        console.log(JSON.stringify(mockData))
     });
 
     it('数组：爷爷级已生成的值依赖', function() {
@@ -188,7 +177,6 @@ describe('function', function() {
         let mockData = executer.exec(schema);
         let validator = Validator.from(schema);
         assert(validator.validate(mockData) === true && mockData[0].child.foo1 === `${mockData[0].foo}${mockData[0].bar}`);
-        console.log(JSON.stringify(mockData))
     });
 
 
@@ -207,7 +195,6 @@ describe('function', function() {
         let mockData = executer.exec(schema);
         let validator = Validator.from(schema);
         assert(validator.validate(mockData) === true && mockData.array[0].child.foo1 === `${mockData.foo}${mockData.bar}`);
-        console.log(JSON.stringify(mockData))
     });
 
     it('数组：数组同级已生成的值依赖', function() {
@@ -235,6 +222,5 @@ describe('function', function() {
             mockData.array[0].child.foo1 === `${mockData.foo}${mockData.bar}` &&
             mockData.array[1].child.foo1 === `引用数组一个元素内的foo1:${mockData.array[0].child.foo1}`
         );
-        console.log(JSON.stringify(mockData))
     });
 });

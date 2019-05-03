@@ -25,7 +25,6 @@ describe('custom_faker', function() {
         let schema = string().example(faker.animal());
         let mockData = executer.exec(schema);
         let validator = Validator.from(schema);
-        console.log(mockData)
         assert(validator.validate(mockData) === true && ["mouse", "rabbit", "cat", "bird"].some(_ => _ === mockData));
     });
 });

@@ -10,7 +10,6 @@ describe('faker-time', function() {
         let mockData = executer.exec(schema);
         let validator = Validator.from(schema);
         assert(validator.validate(mockData) === true);
-        console.log(mockData)
     });
 
     it('指定时间', function() {
@@ -18,14 +17,12 @@ describe('faker-time', function() {
         let mockData = executer.exec(schema);
         let validator = Validator.from(schema);
         assert(validator.validate(mockData) === true && mockData.startsWith('12:00:00'));
-        console.log(mockData)
     });
 
     it('指定格式', function() {
         let schema = string().example(faker.time({format: 'HHmmss'}));
         let mockData = executer.exec(schema);
         let validator = Validator.from(schema);
-        console.log(mockData)
         assert(validator.validate(mockData) === true && /\d{6}/.test(mockData));
     });
 
@@ -33,7 +30,6 @@ describe('faker-time', function() {
         let schema = string().example(faker.time({at: '12:00:00', offset:{hours: -1, minutes: 1}}));
         let mockData = executer.exec(schema);
         let validator = Validator.from(schema);
-        console.log(mockData)
         assert(validator.validate(mockData) === true && mockData === '11:01:00');
     });
 });

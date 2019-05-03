@@ -10,7 +10,6 @@ describe('faker-address', function() {
         let mockData = executer.exec(schema);
         let validator = Validator.from(schema);
         assert(validator.validate(mockData) === true);
-        console.log(mockData)
     });
 
     it('指定省', function() {
@@ -18,7 +17,6 @@ describe('faker-address', function() {
         let mockData = executer.exec(schema);
         let validator = Validator.from(schema);
         assert(validator.validate(mockData) === true && mockData.startsWith('广东省'));
-        console.log(mockData)
     });
 
     it('指定省市', function() {
@@ -26,7 +24,6 @@ describe('faker-address', function() {
         let mockData = executer.exec(schema);
         let validator = Validator.from(schema);
         assert(validator.validate(mockData) === true && mockData.startsWith('广东省汕头市'));
-        console.log(mockData)
     });
 
     it('指定省市区', function() {
@@ -34,6 +31,5 @@ describe('faker-address', function() {
         let mockData = executer.exec(schema);
         let validator = Validator.from(schema);
         assert(validator.validate(mockData) === true && mockData.startsWith('广东省汕头市濠江区'));
-        console.log(mockData)
     });
 });

@@ -10,7 +10,6 @@ describe('faker-birthday', function() {
         let schema = string().example(faker.birthday());
         let mockData = executer.exec(schema);
         let validator = Validator.from(schema);
-        console.log(mockData)
         assert(
             validator.validate(mockData) === true && 
             /\d{4}-\d{2}-\d{2}/.test(mockData) &&
@@ -22,7 +21,6 @@ describe('faker-birthday', function() {
         let schema = string().example(faker.birthday({age: 20}));
         let mockData = executer.exec(schema);
         let validator = Validator.from(schema);
-        console.log(mockData)
         assert(validator.validate(mockData) === true && moment().diff(moment(mockData), 'years') == 20);
     });
 
@@ -30,7 +28,6 @@ describe('faker-birthday', function() {
         let schema = string().example(faker.birthday({format: 'YYYYMMDD'}));
         let mockData = executer.exec(schema);
         let validator = Validator.from(schema);
-        console.log(mockData)
         assert(validator.validate(mockData) === true && /\d{4}\d{2}\d{2}/.test(mockData));
     });
 });

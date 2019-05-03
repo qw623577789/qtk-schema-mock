@@ -28,8 +28,7 @@ describe('array', function() {
             ".[0]": 3,
             ".[0].d": 1
         });
-        let validator = Validator.from(schema);
-        console.log(mockData);
+        let validator = Validator.from(schema);;
         assert(
             validator.validate(mockData) === true && 
             mockData[0].a !== undefined &&

@@ -9,7 +9,6 @@ describe('faker-chinese-name', function() {
         let schema = string().example(faker.chineseName());
         let mockData = executer.exec(schema);
         let validator = Validator.from(schema);
-        console.log(mockData)
         assert(validator.validate(mockData) === true);
     });
 
@@ -17,7 +16,6 @@ describe('faker-chinese-name', function() {
         let schema = string().example(faker.chineseName({lastName: '郑'}));
         let mockData = executer.exec(schema);
         let validator = Validator.from(schema);
-        console.log(mockData)
         assert(validator.validate(mockData) === true && mockData.startsWith('郑'));
     });
 });

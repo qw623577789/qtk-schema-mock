@@ -9,7 +9,6 @@ describe('faker-uuid', function() {
         let schema = string().example(faker.uuid());
         let mockData = executer.exec(schema);
         let validator = Validator.from(schema);
-        console.log(mockData)
         assert(validator.validate(mockData) === true);
     });
 
@@ -17,7 +16,6 @@ describe('faker-uuid', function() {
         let schema = string().example(faker.uuid({withThrough: false}));
         let mockData = executer.exec(schema);
         let validator = Validator.from(schema);
-        console.log(mockData)
         assert(validator.validate(mockData) === true && mockData.indexOf('-') === -1);
     });
 
@@ -25,7 +23,6 @@ describe('faker-uuid', function() {
         let schema = string().example(faker.uuid({upperCase: true}));
         let mockData = executer.exec(schema);
         let validator = Validator.from(schema);
-        console.log(mockData)
         assert(validator.validate(mockData) === true && mockData === mockData.toUpperCase());
     });
 });

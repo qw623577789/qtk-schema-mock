@@ -9,7 +9,6 @@ describe('faker-mobile', function() {
         let schema = string().example(faker.mobile());
         let mockData = executer.exec(schema);
         let validator = Validator.from(schema);
-        console.log(mockData)
         assert(validator.validate(mockData) === true && mockData.length === 11);
     });
 
@@ -17,7 +16,6 @@ describe('faker-mobile', function() {
         let schema = string().example(faker.mobile({prefix: '135'}));
         let mockData = executer.exec(schema);
         let validator = Validator.from(schema);
-        console.log(mockData)
         assert(validator.validate(mockData) === true && mockData.startsWith('135'));
     });
 });

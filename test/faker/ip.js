@@ -9,7 +9,6 @@ describe('faker-ip', function() {
         let schema = string().example(faker.ip());
         let mockData = executer.exec(schema);
         let validator = Validator.from(schema);
-        console.log(mockData)
         assert(
             validator.validate(mockData) === true &&
             /((25[0-5]|2[0-4]\d|((1\d{2})|([1-9]?\d)))\.){3}(25[0-5]|2[0-4]\d|((1\d{2})|([1-9]?\d)))/.test(mockData)

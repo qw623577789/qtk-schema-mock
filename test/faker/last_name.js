@@ -9,7 +9,6 @@ describe('faker-last-name', function() {
         let schema = string().example(faker.lastName());
         let mockData = executer.exec(schema);
         let validator = Validator.from(schema);
-        console.log(mockData)
         assert(validator.validate(mockData) === true);
     });
 });

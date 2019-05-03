@@ -10,14 +10,12 @@ describe('faker-date-time', function() {
         let mockData = executer.exec(schema);
         let validator = Validator.from(schema);
         assert(validator.validate(mockData) === true);
-        console.log(mockData)
     });
 
     it('指定日期时间', function() {
         let schema = string().example(faker.dateTime({at: '2019-01-01 00:00:00'}));
         let mockData = executer.exec(schema);
         let validator = Validator.from(schema);
-        console.log(mockData)
         assert(validator.validate(mockData) === true && mockData === '2019-01-01 00:00:00');
     });
 
@@ -25,7 +23,6 @@ describe('faker-date-time', function() {
         let schema = string().example(faker.dateTime({format: 'YYYYMMDDHHmmss'}));
         let mockData = executer.exec(schema);
         let validator = Validator.from(schema);
-        console.log(mockData)
         assert(validator.validate(mockData) === true && /\d{14}/.test(mockData));
     });
 
@@ -33,7 +30,6 @@ describe('faker-date-time', function() {
         let schema = string().example(faker.dateTime({at: '2019-01-01', offset:{days: -1, months: 1}}));
         let mockData = executer.exec(schema);
         let validator = Validator.from(schema);
-        console.log(mockData)
         assert(validator.validate(mockData) === true && mockData === '2019-01-31 00:00:00');
     });
 });

@@ -10,7 +10,6 @@ describe('faker-zip-code', function() {
         let mockData = executer.exec(schema);
         let validator = Validator.from(schema);
         assert(validator.validate(mockData) === true);
-        console.log(mockData)
     });
 
     it('指定省', function() {
@@ -29,7 +28,6 @@ describe('faker-zip-code', function() {
                 }, [])
                 .some(_ => mockData.startsWith(_))
         );
-        console.log(mockData)
     });
 
     it('指定省市', function() {
@@ -45,7 +43,6 @@ describe('faker-zip-code', function() {
                 .children
                 .some(_ => mockData.startsWith(_.zipCode))
             );
-        console.log(mockData)
     });
 
     it('指定省市区', function() {
@@ -64,6 +61,5 @@ describe('faker-zip-code', function() {
                     .zipCode
             )
         );
-        console.log(mockData)
     });
 });
