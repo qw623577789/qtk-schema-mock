@@ -196,11 +196,11 @@ oneOf|其无关键字|[样例](test/mock/oneOf.js)
                 hours: 0, minutes: 0, seconds: 0
             }}
 
-            参数名|描述|默认值|示例|示例值
-            --|--|--|--|--
-            format|时间格式|HH:mm:ss|faker.time({format: 'HHmmss'})|040513
-            at|指定时间，使用HH:mm:ss格式|now|faker.time({at: '12:00:00'})|12:00:00
-            offset|同``date``|||
+        参数名|描述|默认值|示例|示例值
+        --|--|--|--|--
+        format|时间格式|HH:mm:ss|faker.time({format: 'HHmmss'})|040513
+        at|指定时间，使用HH:mm:ss格式|now|faker.time({at: '12:00:00'})|12:00:00
+        offset|同``date``|||
     - 示例: 22:43:02
     - [测试样例](test/fake/time.js)
 
@@ -211,11 +211,11 @@ oneOf|其无关键字|[样例](test/mock/oneOf.js)
                 days: 0, hours: 0, minutes: 0, seconds: 0
             }}
 
-            参数名|描述|默认值|示例|示例值
-            --|--|--|--|--
-            format|日期时间格式|YYYY-MM-DD HH:mm:ss|faker.dateTime({format: 'YYYYMMDDHHmmss'})|20171022004111
-            at|指定时间，使用YYYY-MM-DD HH:mm:ss格式|now|faker.dateTime({at: '2019-01-01 00:00:00'})|2019-01-01 00:00:00
-            offset|同``date``|||
+        参数名|描述|默认值|示例|示例值
+        --|--|--|--|--
+        format|日期时间格式|YYYY-MM-DD HH:mm:ss|faker.dateTime({format: 'YYYYMMDDHHmmss'})|20171022004111
+        at|指定时间，使用YYYY-MM-DD HH:mm:ss格式|now|faker.dateTime({at: '2019-01-01 00:00:00'})|2019-01-01 00:00:00
+        offset|同``date``|||
     - 示例: 2023-05-06 00:41:11
     - [测试样例](test/fake/dateTime.js)
 
@@ -223,10 +223,10 @@ oneOf|其无关键字|[样例](test/mock/oneOf.js)
     - 描述: 生成一个生日
     - 参数: {age = 18, format = 'YYYY-MM-DD'}
 
-            参数名|描述|默认值|示例|示例值
-            --|--|--|--|--
-            age|指定当前岁数|18|faker.birthday({age: 20})|1999-03-11
-            format|日期格式|YYYY-MM-DD|faker.birthday({format: 'YYYYMMDD'})|20171022
+        参数名|描述|默认值|示例|示例值
+        --|--|--|--|--
+        age|指定当前岁数|18|faker.birthday({age: 20})|1999-03-11
+        format|日期格式|YYYY-MM-DD|faker.birthday({format: 'YYYYMMDD'})|20171022
         
     - 示例: 2001-02-07
     - [测试样例](test/fake/birthday.js)
@@ -238,11 +238,11 @@ oneOf|其无关键字|[样例](test/mock/oneOf.js)
                 days: 0, hours: 0, minutes: 0, seconds: 0
             }, milli = false}
 
-            参数名|描述|默认值|示例|示例值
-            --|--|--|--|--
-            at|指定时间，使用YYYY-MM-DD HH:mm:ss格式|now|faker.timestamp({at: '2019-01-01 00:00:00'})|1554091200
-            offset|同``date``|||
-            milli|毫秒级|now|faker.timestamp({milli: true})|1554091200123||
+        参数名|描述|默认值|示例|示例值
+        --|--|--|--|--
+        at|指定时间，使用YYYY-MM-DD HH:mm:ss格式|now|faker.timestamp({at: '2019-01-01 00:00:00'})|1554091200
+        offset|同``date``|||
+        milli|毫秒级|now|faker.timestamp({milli: true})|1554091200123||
     - 示例: 1554757895
     - [测试样例](test/fake/timestamp.js)
 
@@ -264,9 +264,9 @@ oneOf|其无关键字|[样例](test/mock/oneOf.js)
     - 描述: 生成英文名字
     - 参数: {lastName}
 
-            参数名|描述|默认值|示例|示例值
-            --|--|--|--|--
-            lastName|指定英文姓|undefined|faker.name({lastName: 'Smith'})|Morgan Smith
+        参数名|描述|默认值|示例|示例值
+        --|--|--|--|--
+        lastName|指定英文姓|undefined|faker.name({lastName: 'Smith'})|Morgan Smith
     - 示例: Susan Ruiz
     - [测试用例](test/fake/name.js)
 
@@ -286,9 +286,9 @@ oneOf|其无关键字|[样例](test/mock/oneOf.js)
     - 描述: 生成一个中文姓名
     - 参数: {lastName}
 
-            参数名|描述|默认值|示例|示例值
-            --|--|--|--|--
-            firstName|指定姓|undefined|faker.chineseName({lastName: '郑'})|郑肖昰
+        参数名|描述|默认值|示例|示例值
+        --|--|--|--|--
+        firstName|指定姓|undefined|faker.chineseName({lastName: '郑'})|郑肖昰
     - 示例: 郑肖昰
     - [测试用例](test/fake/chineseName.js)
 
@@ -304,9 +304,9 @@ oneOf|其无关键字|[样例](test/mock/oneOf.js)
     - 描述: 生成一个电子邮箱
     - 参数: {suffix}
 
-            参数名|描述|默认值|示例|示例值
-            --|--|--|--|--
-            suffix|指定邮箱后缀|undefined|faker.email({suffix: 'vanchu.net'})|c5ZBu4BsnlpME9tEv4Y@vanchu.net
+        参数名|描述|默认值|示例|示例值
+        --|--|--|--|--
+        suffix|指定邮箱后缀|undefined|faker.email({suffix: 'vanchu.net'})|c5ZBu4BsnlpME9tEv4Y@vanchu.net
     - 示例: 1AHtxnK5NLNk5GLbe64@live.com
     - [测试用例](test/fake/email.js)
 
@@ -314,10 +314,10 @@ oneOf|其无关键字|[样例](test/mock/oneOf.js)
     - 描述: 生成一个url
     - 参数: {withDomain = true, domain}
         
-            参数名|描述|默认值|示例|示例值
-            --|--|--|--|--
-            withDomain|携带域名|true|faker.url({withDomain: false})|/loHLX.html
-            domain|指定url域名|undefined|faker.url({domain: 'http://www.baidu.com'})|http://www.baidu.com/9FP.gif
+        参数名|描述|默认值|示例|示例值
+        --|--|--|--|--
+        withDomain|携带域名|true|faker.url({withDomain: false})|/loHLX.html
+        domain|指定url域名|undefined|faker.url({domain: 'http://www.baidu.com'})|http://www.baidu.com/9FP.gif
     - 示例: http://tezmyz.qemimdhq.com/7YTG.png
     - [测试用例](test/fake/url.js)
 
@@ -325,11 +325,11 @@ oneOf|其无关键字|[样例](test/mock/oneOf.js)
     - 描述: 生成一个固话号码
     - 参数: {province, city, country}
 
-            参数名|描述|默认值|示例|示例值
-            --|--|--|--|--
-            province|指定省份|undefined|faker.telephone({province: '广东省'})|0750-9015768
-            city|指定省市|undefined|faker.telephone({province: '广东省', city: '汕头市'})|0754-4266370
-            country|指定省市区|undefined|faker.telephone({province: '广东省', city: '汕头市', country: '濠江区'})|0754-63703385
+        参数名|描述|默认值|示例|示例值
+        --|--|--|--|--
+        province|指定省份|undefined|faker.telephone({province: '广东省'})|0750-9015768
+        city|指定省市|undefined|faker.telephone({province: '广东省', city: '汕头市'})|0754-4266370
+        country|指定省市区|undefined|faker.telephone({province: '广东省', city: '汕头市', country: '濠江区'})|0754-63703385
     - 示例: 0456-96888714
     - [测试用例](test/fake/telephone.js)
 
@@ -337,9 +337,9 @@ oneOf|其无关键字|[样例](test/mock/oneOf.js)
     - 描述: 生成一个移动电话号码
     - 参数: {prefix}
 
-            参数名|描述|默认值|示例|示例值
-            --|--|--|--|--
-            prefix|指定号段|undefined|faker.mobile({prefix: '135'})|13516330565
+        参数名|描述|默认值|示例|示例值
+        --|--|--|--|--
+        prefix|指定号段|undefined|faker.mobile({prefix: '135'})|13516330565
     - 示例: 16664872095
     - [测试用例](test/fake/mobile.js)
 
@@ -355,9 +355,9 @@ oneOf|其无关键字|[样例](test/mock/oneOf.js)
     - 描述: 生成城市名
     - 参数: {province}
 
-            参数名|描述|默认值|示例|示例值
-            --|--|--|--|--
-            province|指定省份|undefined|faker.city({province: '广东省'})|东莞市
+        参数名|描述|默认值|示例|示例值
+        --|--|--|--|--
+        province|指定省份|undefined|faker.city({province: '广东省'})|东莞市
     - 示例: 开封市
     - [测试用例](test/fake/city.js)
 
@@ -365,10 +365,10 @@ oneOf|其无关键字|[样例](test/mock/oneOf.js)
     - 描述: 生成区名
     - 参数: {province, city}
 
-            参数名|描述|默认值|示例|示例值
-            --|--|--|--|--
-            province|指定省份|undefined|faker.country({province: '广东省'})|余杭区
-            city|指定省市|undefined|faker.country({province: '广东省', city: '汕头市'})|濠江区
+        参数名|描述|默认值|示例|示例值
+        --|--|--|--|--
+        province|指定省份|undefined|faker.country({province: '广东省'})|余杭区
+        city|指定省市|undefined|faker.country({province: '广东省', city: '汕头市'})|濠江区
     - 示例:
     - [测试用例](test/fake/country.js)
 
@@ -382,11 +382,11 @@ oneOf|其无关键字|[样例](test/mock/oneOf.js)
     - 描述: 生成一个带省市区街道地址
     - 参数: {province, city, country}
 
-            参数名|描述|默认值|示例|示例值
-            --|--|--|--|--
-            province|指定省份|undefined|faker.address({province: '广东省'})|广东省新界惠东县北京街84号
-            city|指定省市|undefined|faker.address({province: '广东省', city: '汕头市'})|广东省汕头市殷都区上杭路457号
-            country|指定省市区|undefined|faker.address({province: '广东省', city: '汕头市', country: '濠江区'})|广东省汕头市濠江区山海关路816号
+        参数名|描述|默认值|示例|示例值
+        --|--|--|--|--
+        province|指定省份|undefined|faker.address({province: '广东省'})|广东省新界惠东县北京街84号
+        city|指定省市|undefined|faker.address({province: '广东省', city: '汕头市'})|广东省汕头市殷都区上杭路457号
+        country|指定省市区|undefined|faker.address({province: '广东省', city: '汕头市', country: '濠江区'})|广东省汕头市濠江区山海关路816号
         - 示例: 海南省保山市调兵山市西陵峡街499号
     - [测试用例](test/fake/address.js)
 
@@ -394,11 +394,11 @@ oneOf|其无关键字|[样例](test/mock/oneOf.js)
     - 描述: 生成一个地区编码
     - 参数: {province, city, country}
 
-            参数名|描述|默认值|示例|示例值
-            --|--|--|--|--
-            province|指定省份|undefined|faker.areaCode({province: '广东省'})|441481
-            city|指定省市|undefined|faker.areaCode({province: '广东省', city: '汕头市'})|440523
-            country|指定省市区|undefined|faker.areaCode({province: '广东省', city: '汕头市', country: '濠江区'})|440512
+        参数名|描述|默认值|示例|示例值
+        --|--|--|--|--
+        province|指定省份|undefined|faker.areaCode({province: '广东省'})|441481
+        city|指定省市|undefined|faker.areaCode({province: '广东省', city: '汕头市'})|440523
+        country|指定省市区|undefined|faker.areaCode({province: '广东省', city: '汕头市', country: '濠江区'})|440512
     - 示例: 320211
     - [测试用例](test/fake/areaCode.js)
 
@@ -406,11 +406,11 @@ oneOf|其无关键字|[样例](test/mock/oneOf.js)
     - 描述: 生成一个邮政编码
     - 参数: {province, city, country}
 
-            参数名|描述|默认值|示例|示例值
-            --|--|--|--|--
-            province|指定省份|undefined|faker.zipCode({province: '广东省'})|510665
-            city|指定省市|undefined|faker.zipCode({province: '广东省', city: '汕头市'})|515041
-            country|指定省市区|undefined|faker.zipCode({province: '广东省', city: '汕头市', country: '濠江区'})|515071
+        参数名|描述|默认值|示例|示例值
+        --|--|--|--|--
+        province|指定省份|undefined|faker.zipCode({province: '广东省'})|510665
+        city|指定省市|undefined|faker.zipCode({province: '广东省', city: '汕头市'})|515041
+        country|指定省市区|undefined|faker.zipCode({province: '广东省', city: '汕头市', country: '濠江区'})|515071
     - 示例: 411300
     - [测试用例](test/fake/zipCode.js)
 
@@ -420,14 +420,14 @@ oneOf|其无关键字|[样例](test/mock/oneOf.js)
     - 描述: 生成一个身份证号
     - 参数: {birth, age, isMale = true, province, city, country}
 
-            参数名|描述|默认值|示例|示例值
-            --|--|--|--|--
-            birth|生日(与age二选一)|undefined|faker.idCard({birth: '1993-05-06'})|433123199305062995
-            age|岁数(与birth二选一)|undefined|faker.idCard({age: 25})|371403199404081350
-            isMale|是否为男性|true|faker.idCard({isMale: true})|340181195004088578
-            province|指定省份|undefined|faker.idCard({province: '广东省'})|44530219440408265X
-            city|指定省市|undefined|faker.idCard({province: '广东省', city: '汕头市'})|44051319920408566X
-            country|指定省市区|undefined|faker.idCard({province: '广东省', city: '汕头市', country: '濠江区'})|44051319920408566X
+        参数名|描述|默认值|示例|示例值
+        --|--|--|--|--
+        birth|生日(与age二选一)|undefined|faker.idCard({birth: '1993-05-06'})|433123199305062995
+        age|岁数(与birth二选一)|undefined|faker.idCard({age: 25})|371403199404081350
+        isMale|是否为男性|true|faker.idCard({isMale: true})|340181195004088578
+        province|指定省份|undefined|faker.idCard({province: '广东省'})|44530219440408265X
+        city|指定省市|undefined|faker.idCard({province: '广东省', city: '汕头市'})|44051319920408566X
+        country|指定省市区|undefined|faker.idCard({province: '广东省', city: '汕头市', country: '濠江区'})|44051319920408566X
     - 示例: 61082119740408277X
     - [测试用例](test/fake/idCard.js)
 
@@ -435,10 +435,10 @@ oneOf|其无关键字|[样例](test/mock/oneOf.js)
     - 描述: 生成一个uuid
     - 参数: {withThrough = false, upperCase = false}
 
-            参数名|描述|默认值|示例|示例值
-            --|--|--|--|--
-            withThrough|是否带有"-"|false|faker.uuid({withThrough: false})|31c0ff1eaec14a28b1b3d0bc693c5fb7
-            upperCase|是否大写|false|faker.uuid({upperCase: true})|080FF48A0D45444EBAEA85D2B6EE7D0A
+        参数名|描述|默认值|示例|示例值
+        --|--|--|--|--
+        withThrough|是否带有"-"|false|faker.uuid({withThrough: false})|31c0ff1eaec14a28b1b3d0bc693c5fb7
+        upperCase|是否大写|false|faker.uuid({upperCase: true})|080FF48A0D45444EBAEA85D2B6EE7D0A
     - 示例: d56a70799bc44982b659d3a44f21ba3f
     - [测试用例](test/fake/uuid.js)
 
@@ -535,7 +535,6 @@ let schema = object().properties({
     }
 }
 ```
-----
 
 当数组元素为object对象时，同个数组元素内值引用跟上述使用方法一致，下面只举例``数组元素对象内对未生成的节点值依赖``
 #### 数组元素对象内对未生成的节点值依赖
