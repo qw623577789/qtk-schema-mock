@@ -174,18 +174,18 @@ oneOf|其无关键字|[样例](test/mock/oneOf.js)
                 days: 0, hours: 0, minutes: 0, seconds: 0
             }
 
-            参数名|描述|默认值|示例|示例值
-            --|--|--|--|--
-            format|日期格式|YYYY-MM-DD|faker.date({format: 'YYYYMMDD'})|20190606
-            at|指定日期，使用YYYY-MM-DD格式|now|faker.date({at: '2019-01-01'})|2019-01-01
-            offset.years|在指定日期上加减年数，正数为加，负数减|0|faker.date({at: '2019-01-01', offset: {years: 1}})|2020-01-01
-            offset.quarters|在指定日期上加减季度数，正负数规则同上|0|faker.date({at: '2019-01-01', offset: {quarters: 1}})|2019-04-01
-            offset.months|在指定日期上加减月份数，正负数规则同上|0|faker.date({at: '2019-01-01', offset: {months: 1}})|2019-02-01
-            offset.weeks|在指定日期上加减周数，正负数规则同上|0|faker.date({at: '2019-01-01', offset: {weeks: 1}})|2019-01-08
-            offset.days|在指定日期上加减天数，正负数规则同上|0|faker.date({at: '2019-01-01', offset: {days: 1}})|2019-01-02
-            offset.hours|在指定日期上加减小时数，正负数规则同上|0|faker.date({at: '2019-01-01', offset: {hours: 1}})|2019-01-01
-            offset.minutes|在指定日期上加减分钟数，正负数规则同上|0|faker.date({at: '2019-01-01', offset: {minutes: 1}})|2019-01-01
-            offset.seconds|在指定日期上加减秒数，正负数规则同上|0|faker.date({at: '2019-01-01', offset: {seconds: 1}})|2019-01-01
+        参数名|描述|默认值|示例|示例值
+        --|--|--|--|--
+        format|日期格式|YYYY-MM-DD|faker.date({format: 'YYYYMMDD'})|20190606
+        at|指定日期，使用YYYY-MM-DD格式|now|faker.date({at: '2019-01-01'})|2019-01-01
+        offset.years|在指定日期上加减年数，正数为加，负数减|0|faker.date({at: '2019-01-01', offset: {years: 1}})|2020-01-01
+        offset.quarters|在指定日期上加减季度数，正负数规则同上|0|faker.date({at: '2019-01-01', offset: {quarters: 1}})|2019-04-01
+        offset.months|在指定日期上加减月份数，正负数规则同上|0|faker.date({at: '2019-01-01', offset: {months: 1}})|2019-02-01
+        offset.weeks|在指定日期上加减周数，正负数规则同上|0|faker.date({at: '2019-01-01', offset: {weeks: 1}})|2019-01-08
+        offset.days|在指定日期上加减天数，正负数规则同上|0|faker.date({at: '2019-01-01', offset: {days: 1}})|2019-01-02
+        offset.hours|在指定日期上加减小时数，正负数规则同上|0|faker.date({at: '2019-01-01', offset: {hours: 1}})|2019-01-01
+        offset.minutes|在指定日期上加减分钟数，正负数规则同上|0|faker.date({at: '2019-01-01', offset: {minutes: 1}})|2019-01-01
+        offset.seconds|在指定日期上加减秒数，正负数规则同上|0|faker.date({at: '2019-01-01', offset: {seconds: 1}})|2019-01-01
 
     - 示例: 2015-03-28
     - [测试样例](test/fake/date.js)
