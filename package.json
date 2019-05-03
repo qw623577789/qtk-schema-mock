@@ -30,7 +30,7 @@
         "json-schema",
         "json",
         "schema",
-        "qtk-schema",
+        "qtk-schema"
     ],
     "bugs": {
         "url": "https://github.com/qw623577789/qtk-schema-mock/issues"
