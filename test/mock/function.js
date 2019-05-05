@@ -12,7 +12,7 @@ describe('function', function() {
             foo1: string().example(function() {
                 return this.foo + this.bar
             })
-        });
+        }).requireAll();
         let mockData = executer.exec(schema);
         let validator = Validator.from(schema);
         assert(validator.validate(mockData) === true && mockData.foo1 === `${mockData.foo}${mockData.bar}`);
@@ -25,7 +25,7 @@ describe('function', function() {
             }),
             foo: string(),
             bar: integer()
-        });
+        }).requireAll();
         let mockData = executer.exec(schema);
         let validator = Validator.from(schema);
         assert(validator.validate(mockData) === true && mockData.foo1 === `${mockData.foo}${mockData.bar}`);
@@ -40,7 +40,7 @@ describe('function', function() {
                     return parent(0).foo + parent().bar
                 }),
             }
-        });
+        }).requireAll();
         let mockData = executer.exec(schema);
         let validator = Validator.from(schema);
         assert(validator.validate(mockData) === true && mockData.child.foo1 === `${mockData.foo}${mockData.bar}`);
@@ -55,7 +55,7 @@ describe('function', function() {
                     return parent().foo + parent().bar
                 }),
             }
-        });
+        }).requireAll();
         let mockData = executer.exec(schema);
         let validator = Validator.from(schema);
         assert(validator.validate(mockData) === true && mockData.child.foo1 === `${mockData.foo}${mockData.bar}`);
@@ -73,7 +73,7 @@ describe('function', function() {
                     }),
                 }
             }
-        });
+        }).requireAll();
         let mockData = executer.exec(schema);
         let validator = Validator.from(schema);
         assert(validator.validate(mockData) === true && mockData.child.child.foo1 === `${mockData.foo}${mockData.bar}`);
@@ -91,7 +91,7 @@ describe('function', function() {
             },
             foo: string(),
             bar: integer()
-        });
+        }).requireAll();
         let mockData = executer.exec(schema);
         let validator = Validator.from(schema);
         assert(validator.validate(mockData) === true && mockData.child.child.foo1 === `${mockData.foo}${mockData.bar}`);
@@ -111,7 +111,7 @@ describe('function', function() {
                     }),
                 }
             },
-        });
+        }).requireAll();
         let mockData = executer.exec(schema);
         let validator = Validator.from(schema);
         assert(validator.validate(mockData) === true && mockData.child.child.foo1 === `${mockData.foo}${mockData.bar}`);
@@ -131,7 +131,7 @@ describe('function', function() {
                 return `${this.bar}完美的分隔符` 
             }),
             bar: integer(),
-        });
+        }).requireAll();
         let mockData = executer.exec(schema);
         let validator = Validator.from(schema);
         assert(validator.validate(mockData) === true && mockData.child.child.foo1 === `${mockData.foo}${mockData.bar}`);

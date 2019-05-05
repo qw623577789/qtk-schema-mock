@@ -112,10 +112,13 @@ module.exports = class {
             }, proxy);
         }
         else {
-            value = Object.keys(schema.properties || {}).reduce((prev, key) => {
-                if (!Object.keys(prev).includes(key)) prev[key] = this._exec(schema.properties[key], prev, path === '.' ? `${path}${key}` : `${path}.${key}`, globalFakeDataMap, branchConfig);
-                return prev;
-            }, proxy);
+            let requiredPropertiesKey = schema.required || [];
+            value = Object.keys(schema.properties || {})
+                .filter(key => requiredPropertiesKey.includes(key))
+                .reduce((prev, key) => {
+                    if (!Object.keys(prev).includes(key)) prev[key] = this._exec(schema.properties[key], prev, path === '.' ? `${path}${key}` : `${path}.${key}`, globalFakeDataMap, branchConfig);
+                    return prev;
+                }, proxy);
         }
 
         return value;

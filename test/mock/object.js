@@ -17,7 +17,7 @@ describe('object', function() {
         let schema = object().properties({
             foo: string(),
             bar: integer()
-        });
+        }).requireAll();
         let mockData = executer.exec(schema);
         let validator = Validator.from(schema);
         assert(validator.validate(mockData) === true);

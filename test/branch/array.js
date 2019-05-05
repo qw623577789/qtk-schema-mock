@@ -21,7 +21,7 @@ describe('array', function() {
                             da: string()
                         }
                     )
-                })
+                }).requireAll()
             )
         );
         let mockData = executer.exec(schema, {

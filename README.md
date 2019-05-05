@@ -10,7 +10,7 @@ const {faker, executer} = require('@qtk/schema-mock');
 const schema = object().properties({
     foo: string().example(faker.string()),
     bar: integer().example(faker.integer())
-})
+}).requireAll()
 
 //根据schema生成mock数据
 const mockData = executer.exec(schema);
@@ -42,7 +42,7 @@ console.log(mockData)
     const schema = object().properties({
         foo: string().example("abc"),
         bar: integer().example(123)
-    })
+    }).requireAll()
     ```
     ```bash
     { foo: 'abc', bar: 123 }
@@ -56,7 +56,7 @@ console.log(mockData)
     const schema = object().properties({
         foo: string().example(faker.string()),
         bar: integer().example(faker.integer())
-    })
+    }).requireAll()
     ```
     ```bash
     { foo: '11A3S', bar: 1101816453870425 }
@@ -72,7 +72,7 @@ console.log(mockData)
         timeNow: integer().example(function() {
             return Date.now();
         })
-    });
+    }).requireAll();
     ```
     ```bash
     { foo: '22DFG', bar: 1555554889000 }
@@ -85,7 +85,7 @@ console.log(mockData)
         foobar: string().example(function() {
             return this.foo + this.bar;
         })
-    });
+    }).requireAll();
     ```
     ```bash
     { foo: '11A3S', bar: 1101816453870425, foobar: '11A3S1101816453870425'}
@@ -460,7 +460,7 @@ let schema = object().properties({
     foobar: string().example(function() {
         return this.foo + this.bar
     })
-});
+}).requireAll();
 ```
 ```bash
 { 
@@ -477,7 +477,7 @@ let schema = object().properties({
     })
     foo: string(),
     bar: integer(),
-});
+}).requireAll();
 ```
 ```bash
 { 
@@ -496,7 +496,7 @@ let schema = object().properties({
             return parent(0).foo + parent().bar; //传0或者不传，都是取父对象
         }),
     }
-});
+}).requireAll();
 ```
 ```bash
 {
@@ -522,7 +522,7 @@ let schema = object().properties({
             }),
         }
     },
-});
+}).requireAll();
 ```
 ```bash
 {
@@ -651,7 +651,7 @@ let schema = {
             b: integer().example(function(parent) {
                 return parent().b
             }),
-        })
+        }).requireAll()
     )
 };
 ```
@@ -740,7 +740,7 @@ let schema = array().item(
                     da: string()
                 }
             )
-        })
+        }).requireAll()
     )
 );
 let mockData = executer.exec(schema, {
@@ -770,7 +770,7 @@ let schema = oneOf(
                 da: string()
             }
         )
-    })
+    }).requireAll()
 );
 let mockData = executer.exec(schema, {
     ".": 3, //控制生成的第一个数组元素采用分支序号为3的情况

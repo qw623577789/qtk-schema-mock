@@ -20,7 +20,7 @@ describe('oneOf', function() {
                         da: string()
                     }
                 )
-            })
+            }).requireAll()
         );
         let mockData = executer.exec(schema, {
             ".": 3,
