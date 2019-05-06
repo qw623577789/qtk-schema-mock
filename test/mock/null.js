@@ -11,15 +11,7 @@ describe('null', function() {
         let validator = Validator.from(schema);
         assert(validator.validate(mockData) === true);
 
-        schema.example(faker.null());
-        mockData = executer.exec(schema);
-        assert(validator.validate(mockData) === true);
-
         schema = empty();
-        mockData = executer.exec(schema);
-        assert(validator.validate(mockData) === true);
-
-        schema.example(faker.null());
         mockData = executer.exec(schema);
         assert(validator.validate(mockData) === true);
     });

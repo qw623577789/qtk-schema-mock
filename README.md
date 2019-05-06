@@ -373,7 +373,7 @@ oneOf|其无关键字|[样例](test/mock/oneOf.js)
     - [测试用例](test/fake/country.js)
 
 - **street**
-    - 描述: 生成一个带省市区街道地址
+    - 描述: 生成一个街道门牌地址
     - 参数: 无
     - 示例: 利津路171号
     - [测试用例](test/fake/street.js)
@@ -621,13 +621,11 @@ let schema = object()
 #随机情况之一
 { 
     type: 'student',
-    grade: -8587181581065479,
-    salary: -5665905248138731 
+    grade: -8587181581065479
 }
 #随机情况之二
 { 
     type: 'staff',
-    grade: -6737966537350263,
     salary: -7440343277696143 
 }
 ```
