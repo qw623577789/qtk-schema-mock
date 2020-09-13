@@ -1,6 +1,6 @@
 {
     "name": "@qtk/schema-mock",
-    "version": "0.0.1",
+    "version": "0.1.0",
     "description": "基于qtk-schema生成模拟数据",
     "main": "index.js",
     "scripts": {

@@ -2,14 +2,14 @@ const BaseFaker = require('../faker/base');
 const RandExp = require('randexp');
 const Ajv = require('ajv');
 const ajv = new Ajv();
-const {validator: Validator} = require('@qtk/schema');
+const { validator: Validator } = require('@qtk/schema');
 
 module.exports = class {
-    static exec(qtkSchema, branchConfig= {}) {
-        let jsonSchema = Validator.from(qtkSchema).jsonSchema;
+    static exec(schema, branchConfig = {}, isJSONSchema = false) {
+        let jsonSchema = isJSONSchema === false ? Validator.from(schema).jsonSchema : schema;
         if (Object.keys(branchConfig).length !== 0) { //数组[]支持
             branchConfig = Object.keys(branchConfig)
-                .reduce((prev, rawKey) => { 
+                .reduce((prev, rawKey) => {
                     let key = rawKey.replace(/\./g, '\\\.');
                     key = key.replace(/\[\]/g, '\\\[\\\d+\\\]');
                     prev[key] = branchConfig[rawKey];
@@ -20,7 +20,7 @@ module.exports = class {
     }
 
     static _exec(schema, contextFakeData, path, globalFakeDataMap, branchConfig) {
-        switch(schema.type || 'oneOf') {
+        switch (schema.type || 'oneOf') {
             case 'boolean':
             case 'integer':
             case 'string':
@@ -49,7 +49,7 @@ module.exports = class {
         }
         else if (typeof schema.example === 'function') {
             let proxy = new Proxy(schema.example, {
-                apply (target, ctx, args) {                            
+                apply(target, ctx, args) {
                     return Reflect.apply(target, Object.assign(contextFakeData), [(level = 0) => {
                         let parentPath = path.split('.').slice(0, -2 - level).join('.');
                         if (parentPath === "") parentPath = '.';
@@ -71,10 +71,10 @@ module.exports = class {
         let value = undefined;
         let that = this;
         let proxy = new Proxy({}, {
-            get: function(target, key, _proxy) {
+            get: function (target, key, _proxy) {
                 if (
                     schema.properties === undefined ||
-                    schema.properties[key] === undefined || 
+                    schema.properties[key] === undefined ||
                     schema.properties[key].type === undefined
                 ) { //非schema定义的字段原路返回，原路返回；
                     return Reflect.get(target, key, _proxy);
@@ -94,7 +94,7 @@ module.exports = class {
         //if-require处理
         if (schema.if !== undefined) {
             let listIfObjectSchema = this._listIfObjectSchema(schema);
-            
+
             let matchKey = Object.keys(branchConfig)
                 .filter(key => (new RegExp(key)).test(path))
                 .sort((left, right) => left.length - right.length)
@@ -167,7 +167,7 @@ module.exports = class {
                 ifObject.required.reduce((prev, curr) => {
                     prev[curr] = schema.properties[curr];
                     return prev;
-                },{}),
+                }, {}),
                 schema.if.properties
             );
         }
@@ -184,7 +184,7 @@ module.exports = class {
                 ifObject.required.reduce((prev, curr) => {
                     prev[curr] = schema.patternProperties[curr];
                     return prev;
-                },{}),
+                }, {}),
                 schema.if.patternProperties
             );
         }
@@ -219,7 +219,7 @@ module.exports = class {
                     properties: schema.properties,
                     patternProperties: schema.propertiesObject,
                     then: schema.else
-                }, 
+                },
                 collection
             );
         }
@@ -239,7 +239,7 @@ module.exports = class {
 
             //生成else情况的条件schema
             let ifKeyMockValues = Object.keys(ifKeySchemas).reduce((prev, key) => {
-                let fieldSchema = (schema.properties !== undefined && schema.properties[key]) || 
+                let fieldSchema = (schema.properties !== undefined && schema.properties[key]) ||
                     (schema.patternProperties !== undefined && schema.patternProperties[key]) || undefined;
                 if (fieldSchema === undefined) return prev; //当前条件对key无要求，则跳过
 
@@ -247,25 +247,25 @@ module.exports = class {
                     let mockValues = fieldSchema.enum.filter(_ => ifKeySchemas[key].every(__ => !__.enum.includes(_)));
                     if (mockValues.length === 0) throw new Error(`if/elseIf条件已经覆盖字段${key}值所有情况，无法生成else情况数据`);
                     let randomIndex = Math.floor(Math.random() * mockValues.length)
-                    prev[key] = {type: fieldSchema.type, enum: [mockValues[randomIndex]]};
+                    prev[key] = { type: fieldSchema.type, enum: [mockValues[randomIndex]] };
                 }
                 else { //碰撞可能性低，即使碰撞，再生成一次，赌100次
                     let mockValue = undefined;
-                    for (let i = 0 ; i < 100; i++) {
+                    for (let i = 0; i < 100; i++) {
                         //生成模拟数据
                         mockValue = this._basicData(fieldSchema, undefined, "", new Map());
                         //检查是否命中其他条件的该字段值
                         let checkResult = ifKeySchemas[key].every(_ => !ajv.compile(_)(mockValue));
-                        if (checkResult === true)　break;
+                        if (checkResult === true) break;
                         mockValue = undefined; //出现碰撞，再来一次
                     }
                     if (mockValue === undefined) throw new Error('尝试100次生成模拟数据都出现命中其他条件的该字段值，这概率太．．．先冷静下');
-                    prev[key] = {type: fieldSchema.type, enum: [mockValue]};
+                    prev[key] = { type: fieldSchema.type, enum: [mockValue] };
                 }
 
                 return prev;
             }, {});
-            
+
             //合成最终的else情况的object schema
             if (schema.properties !== undefined) {
                 Object.assign(schema.properties, ifKeyMockValues);
@@ -273,7 +273,7 @@ module.exports = class {
             else {
                 Object.assign(schema.patternProperties, ifKeyMockValues);
             }
-            
+
             return schema;
         }
         else {　// if/elseIf 情况直接使用该条件的schema即可
